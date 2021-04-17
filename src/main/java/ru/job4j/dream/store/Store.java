@@ -17,9 +17,9 @@ public class Store {
 
 
     private Store() {
-        posts.put(1, new Post(1, "Junior Java Job", "no experience", new Date()));
-        posts.put(2, new Post(2, "Middle Java Job", "2-3 years experience", new Date()));
-        posts.put(3, new Post(3, "Senior Java Job", "5+ years experience", new Date()));
+        posts.put(1, new Post(1, "Junior Java Job", "no experience"));
+        posts.put(2, new Post(2, "Middle Java Job", "2-3 years experience"));
+        posts.put(3, new Post(3, "Senior Java Job", "5+ years experience"));
         candidates.put(1, new Candidate(1, "Junior Java"));
         candidates.put(2, new Candidate(2, "Middle Java"));
         candidates.put(3, new Candidate(3, "Senior Java"));

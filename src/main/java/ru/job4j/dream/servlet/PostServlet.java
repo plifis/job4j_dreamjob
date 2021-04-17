@@ -16,14 +16,8 @@ public class PostServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try {
             Store.instOf().save(new Post(0, req.getParameter("name"),
-                    req.getParameter("description"), sdf.parse(req.getParameter("created"))));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
+                    req.getParameter("description")));
         resp.sendRedirect(req.getContextPath() + "/posts.jsp");
     }
 }

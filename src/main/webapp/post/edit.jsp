@@ -34,8 +34,6 @@
                         <input type="text" class="form-control" name="name">
                         <label>Описание</label>
                         <input type="text" class="form-control" name="description">
-                        <label>Дата</label>
-                        <input type="date" class="form-control" name="created">
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
