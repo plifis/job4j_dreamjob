@@ -27,11 +27,24 @@ public class Store {
     }
 
     public void save(Post post) {
-        post.setId(POST_ID.decrementAndGet());
+        if (post.getId() == 0) {
+            post.setId(POST_ID.decrementAndGet());
+        }
         posts.put(post.getId(), post);
     }
+
+    public Post findPostById(int id) {
+        return posts.get(id);
+    }
+    public Candidate findCandidateById(int id) {
+        return candidates.get(id);
+    }
+
+
     public void save(Candidate candidate) {
-        candidate.setId(CANDIDATE_ID.decrementAndGet());
+        if (candidate.getId() == 0) {
+            candidate.setId(CANDIDATE_ID.decrementAndGet());
+        }
         candidates.put(candidate.getId(), candidate);
     }
 
