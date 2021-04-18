@@ -18,4 +18,10 @@ public class CandidateServlet extends HttpServlet {
                         req.getParameter("name")));
         resp.sendRedirect(req.getContextPath() + "/candidates.jsp");
     }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("candidates", Store.instOf().findAllCandidates());
+        req.getRequestDispatcher("candidates.jsp").forward(req, resp);
+    }
 }
