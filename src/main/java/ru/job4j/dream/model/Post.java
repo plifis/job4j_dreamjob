@@ -16,6 +16,13 @@ public class Post {
         this.created = new Date();
     }
 
+    public Post(int id, String name, String description, Date date) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.created = date;
+    }
+
     public int getId() {
         return id;
     }
