@@ -41,7 +41,15 @@
     <servlet-name>DeletePhotoServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.DeletePhotoServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>AuthServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.AuthServlet</servlet-class>
+  </servlet>
 
+  <servlet-mapping>
+    <servlet-name>AuthServlet</servlet-name>
+    <url-pattern>/auth.do</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>DeletePhotoServlet</servlet-name>
     <url-pattern>/deletePhoto.do</url-pattern>

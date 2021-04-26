@@ -23,6 +23,9 @@
 <body>
 <div class="container">
     <div class="row">
+        <li class="nav-item">
+            <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> Логин </a>
+        </li>
         <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/posts.do">Вакансии</a>
@@ -39,9 +42,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
             </li>
-
         </ul>
-
         </ul>
     </div>
     <div class="row">
