@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.model.Candidate" %>
 <%@ page import="ru.job4j.dream.store.PsqlStore" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -28,6 +30,15 @@
             <div class="card-header">
                 Авторизация
             </div>
+            <div class="card">
+                <c:if test="${not empty error}">
+                    <div style="color:red; padding-left: 10px; font-weight: bold; margin: 30px 0;">
+                            ${error}
+                    </div>
+                </c:if>
+            </div>
+            </div>
+
             <div class="card-body">
                 <form action="<%=request.getContextPath()%>/auth.do" method="post">
                     <div class="form-group">
