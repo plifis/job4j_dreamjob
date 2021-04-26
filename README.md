@@ -1,1 +1,1 @@
-[![Build Status](https://travis-ci.org/plifis/job4j_dreamjob.svg?branch=master)](https://travis-ci.org/plifis/job4j_dreamjob)
+[![Build Status](https://travis-ci.com/plifis/job4j_dreamjob.svg?branch=master)](https://travis-ci.com/plifis/job4j_dreamjob)
