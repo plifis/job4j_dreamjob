@@ -42,7 +42,7 @@ public class PsqlStore implements Store {
     }
 
     public static Store instOf() {
-        return Lazy.INST;
+            return Lazy.INST;
     }
 
     @Override

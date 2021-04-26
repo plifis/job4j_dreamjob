@@ -2,7 +2,7 @@
 <%@ page import="ru.job4j.dream.store.PsqlStore" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
 <%@ page import="java.util.Collection" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -41,12 +41,12 @@
                     <tbody>
                     <c:forEach items="${posts}" var="post">
                     <tr>
-                    <td>
-                        <a href='<c:url value="/post/edit.jsp?id=${post.id}"/>'>
-                            <i class="fa fa-edit mr-3"></i>
-                        </a>
+                        <td>
+                            <a href='<c:url value="/post/edit.jsp?id=${post.id}"/>'>
+                                <i class="fa fa-edit mr-3"></i>
+                            </a>
                         <c:out value="${post.name}"/>
-                    </td>
+                        </td>
                     </tr>
                     </c:forEach>
                     </tbody>

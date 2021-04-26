@@ -2,7 +2,8 @@
 <%@ page import="ru.job4j.dream.store.PsqlStore" %>
 <%@ page import="ru.job4j.dream.model.Candidate" %>
 <%@ page import="java.util.Collection" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>>
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -35,17 +36,24 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">Названия</th>
+                        <th scope="col">Информация</th>
+                        <td> Фото </td>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${candidates}" var="candidate">
                     <tr>
                         <td>
-                            <a href='<c:url value="/candidate/edit.jsp?id=${post.id}"/>'>
+                            <a href='<c:url value="/candidate/edit.jsp?id=${candidate.id}"/>'>
                                 <i class="fa fa-edit mr-3"></i>
                             </a>
                         <c:out value="${candidate.name}"/>
+                        </td>
+                        <td>
+                        <img src="<c:url value='/photo.do?id=${candidate.id}'/>" width="100px" height="100px"/>
+                        <a class="nav-link" href='<c:url value="candidate/photoUpload.jsp?id=${candidate.id}"/>'>Добавить фото</a>
+                            <a class="nav-link" href='<c:url value="/deletePhoto.do?id=${candidate.id}"/>'>Удалить кандидата</a>
+                        </td>
                     </tr>
                     </c:forEach>
                     </tbody>
