@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
 <%@ page import="ru.job4j.dream.store.PsqlStore" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -38,6 +40,11 @@
                 Редактирование вакансии
                 <% } %>
             </div>
+            <ul>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> | Выйти</a>
+            </li>
+            </ul>
             <div class="card-body">
                 <form action="<%=request.getContextPath()%>/posts.do?id=<%=post.getId()%>" method="post">
                     <div class="form-group">
