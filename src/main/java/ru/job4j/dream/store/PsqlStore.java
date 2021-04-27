@@ -78,10 +78,6 @@ public class PsqlStore implements Store {
         }
         return list;
     }
-    @Override
-    public Collection<User> findAllUsers() {
-        return  null;
-    }
 
     @Override
     public void save(Post post) {
@@ -134,10 +130,6 @@ public class PsqlStore implements Store {
         }
     }
 
-    @Override
-    public void save(User user) {
-
-    }
 
     private Candidate createCandidate(Candidate candidate) {
         try (Connection cn = pool.getConnection();
@@ -168,6 +160,56 @@ public class PsqlStore implements Store {
             }
         } else {
             throw new IllegalArgumentException("экземпляр Candidate не должен быть null");
+        }
+    }
+
+
+    @Override
+    public void save(User user) {
+        if (user.getId() == 0) {
+            createUser(user);
+        } else {
+            updateUser(user);
+        }
+    }
+
+
+    private User createUser(User user) {
+        try(Connection cn = pool.getConnection();
+            PreparedStatement ps = cn.prepareStatement(
+                    "INSERT INTO user(name, email, password) "
+                            + "VALUES (?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            ps.execute();
+            try(ResultSet result = ps.getGeneratedKeys()) {
+                if (result.next()) {
+                    user.setId(result.getInt(1));
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    private void updateUser(User user) {
+        if (user != null) {
+            try (Connection cn = pool.getConnection();
+                 PreparedStatement ps = cn.prepareStatement(
+                         "UPDATE user SET name = (?), email = (?), password = (?)")) {
+                ps.setString(1, user.getName());
+                ps.setString(2, user.getEmail());
+                ps.setString(3, user.getPassword());
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            throw new IllegalArgumentException("Экземпляр User не должен быть null");
         }
     }
 
@@ -207,13 +249,22 @@ public class PsqlStore implements Store {
     }
 
     @Override
-    public User findUserById(int id) {
-        return null;
-    }
-
-    @Override
     public User findUserByEmail(String email) {
-        return null;
-    }
-
+        User user = new User();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement(
+                     "SELECT * FROM user WHERE email = (?)"))    {
+            ps.setString(1, email);
+            ResultSet result = ps.executeQuery();
+            if (result.next()) {
+                user.setId(result.getInt(1));
+                user.setName(result.getString(2));
+                user.setEmail(result.getString(3));
+                user.setPassword(result.getString(4));
+            }
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
+        return user;
+        }
 }
