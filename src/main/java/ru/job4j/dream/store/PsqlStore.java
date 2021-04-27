@@ -3,6 +3,8 @@ package ru.job4j.dream.store;
 import org.apache.commons.dbcp2.BasicDataSource;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
+import ru.job4j.dream.model.User;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.*;
@@ -76,6 +78,10 @@ public class PsqlStore implements Store {
         }
         return list;
     }
+    @Override
+    public Collection<User> findAllUsers() {
+        return  null;
+    }
 
     @Override
     public void save(Post post) {
@@ -126,6 +132,11 @@ public class PsqlStore implements Store {
         } else {
             updateCandidate(candidate);
         }
+    }
+
+    @Override
+    public void save(User user) {
+
     }
 
     private Candidate createCandidate(Candidate candidate) {
@@ -192,5 +203,17 @@ public class PsqlStore implements Store {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return candidate;    }
+        return candidate;
+    }
+
+    @Override
+    public User findUserById(int id) {
+        return null;
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return null;
+    }
+
 }
