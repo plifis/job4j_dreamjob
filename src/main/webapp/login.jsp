@@ -49,7 +49,10 @@
                         <label>Пароль</label>
                         <input type="text" class="form-control" name="password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Войти</button>
+                    <div class="container">
+                        <button type="submit" class="btn btn-primary">Войти</button>
+                        <a class="link" href="<%=request.getContextPath()%>/reg.jsp"> Регистрация </a>
+                    </div>
                 </form>
             </div>
         </div>
