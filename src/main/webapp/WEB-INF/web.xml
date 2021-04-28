@@ -30,10 +30,6 @@
     <servlet-class>ru.job4j.dream.servlet.DownloadServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>UploadServlet</servlet-name>
-    <servlet-class>ru.job4j.dream.servlet.UploadServlet</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>PhotoUploadServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.PhotoUploadServlet</servlet-class>>
   </servlet>
@@ -73,10 +69,6 @@
   <servlet-mapping>
     <servlet-name>PhotoUploadServlet</servlet-name>
     <url-pattern>/photo.do</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>UploadServlet</servlet-name>
-    <url-pattern>/upload</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>DownloadServlet</servlet-name>
