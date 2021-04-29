@@ -44,7 +44,7 @@ public class PsqlStore implements Store {
     }
 
     public static Store instOf() {
-            return Lazy.INST;
+        return Lazy.INST;
     }
 
     @Override
@@ -87,6 +87,7 @@ public class PsqlStore implements Store {
             updatePost(post);
         }
     }
+
     private Post createPost(Post post) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
@@ -166,24 +167,20 @@ public class PsqlStore implements Store {
 
     @Override
     public void save(User user) {
-        if (user.getId() == 0) {
             createUser(user);
-        } else {
-            updateUser(user);
-        }
     }
 
 
     private User createUser(User user) {
-        try(Connection cn = pool.getConnection();
-            PreparedStatement ps = cn.prepareStatement(
-                    "INSERT INTO user(name, email, password) "
-                            + "VALUES (?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement(
+                     "INSERT INTO users(name, email, password) "
+                             + "VALUES (?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPassword());
             ps.execute();
-            try(ResultSet result = ps.getGeneratedKeys()) {
+            try (ResultSet result = ps.getGeneratedKeys()) {
                 if (result.next()) {
                     user.setId(result.getInt(1));
                 }
@@ -195,23 +192,21 @@ public class PsqlStore implements Store {
         return user;
     }
 
-    private void updateUser(User user) {
-        if (user != null) {
-            try (Connection cn = pool.getConnection();
-                 PreparedStatement ps = cn.prepareStatement(
-                         "UPDATE user SET name = (?), email = (?), password = (?)")) {
-                ps.setString(1, user.getName());
-                ps.setString(2, user.getEmail());
-                ps.setString(3, user.getPassword());
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            throw new IllegalArgumentException("Экземпляр User не должен быть null");
-        }
-    }
+//    private void updateUser(User user) {
+//        if (user != null) {
+//            try (Connection cn = pool.getConnection();
+//                 PreparedStatement ps = cn.prepareStatement(
+//                         "UPDATE user SET name = (?), email = (?), password = (?)")) {
+//                ps.setString(1, user.getName());
+//                ps.setString(2, user.getEmail());
+//                ps.setString(3, user.getPassword());
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+//            throw new IllegalArgumentException("Экземпляр User не должен быть null");
+//        }
+//    }
 
     @Override
     public Post findPostById(int id) {
@@ -250,21 +245,22 @@ public class PsqlStore implements Store {
 
     @Override
     public User findUserByEmail(String email) {
-        User user = new User();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "SELECT * FROM user WHERE email = (?)"))    {
+                     "SELECT * FROM users WHERE email = (?)")) {
             ps.setString(1, email);
             ResultSet result = ps.executeQuery();
             if (result.next()) {
+                User user = new User(
+                        result.getString(2),
+                        result.getString(3),
+                        result.getString(4));
                 user.setId(result.getInt(1));
-                user.setName(result.getString(2));
-                user.setEmail(result.getString(3));
-                user.setPassword(result.getString(4));
+                return user;
             }
         } catch (Exception e) {
-        e.printStackTrace();
+            e.printStackTrace();
         }
-        return user;
-        }
+        return null;
+    }
 }

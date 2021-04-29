@@ -32,8 +32,8 @@
             </div>
             <div class="card">
                 <c:if test="${not empty error}">
-                    <div style="color:red; padding-left: 10px; font-weight: bold; margin: 30px 0;">
-                            ${error}
+                    <div style="color:#ff0000; padding-left: 10px; font-weight: bold; margin: 30px 0;">
+                           <c:out value="${error}:"/>
                     </div>
                 </c:if>
             </div>
