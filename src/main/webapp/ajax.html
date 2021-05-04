@@ -11,6 +11,21 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
 
 <script>
+    function sendJSON() {
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/items/greet',
+            data: '{text:' + $('#jsonEmail').val() +'}',
+            dataType: 'json'
+        }).done(function (){
+        }).fail(function (){
+            alert('Что-то пошло нет так');
+        })
+
+    }
+</script>
+
+<script>
     function sendGreeting() {
         $.ajax({
             type: 'GET',
@@ -40,6 +55,13 @@
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
         </div>
         <button type="button" class="btn btn-primary" onclick="sendGreeting();">Submit</button>
+    </form>
+    <form>
+        <div class="form-group">
+            <label for="jsonEmail"></label>
+            <input type="email" class="form-control" id="jsonEmail" aria-describedby="emailHelp" placeholder="Enter email to JSON">
+        </div>
+        <button type="button" class="btn btn-primary" onclick="sendJSON();">Submit</button>
     </form>
 </div>
 </body>
