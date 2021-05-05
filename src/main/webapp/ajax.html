@@ -17,11 +17,11 @@
             url: 'http://localhost:8080/items/greet',
             data: '{text:' + $('#jsonEmail').val() +'}',
             dataType: 'json'
-        }).done(function (){
+        }).done(function (json){
+            alert(JSON.stringify(json));
         }).fail(function (){
             alert('Что-то пошло нет так');
         })
-
     }
 </script>
 

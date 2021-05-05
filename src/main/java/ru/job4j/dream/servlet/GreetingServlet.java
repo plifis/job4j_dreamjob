@@ -1,5 +1,6 @@
 package ru.job4j.dream.servlet;
 
+import org.apache.taglibs.standard.tlv.JstlXmlTLV;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -33,7 +34,9 @@ public class GreetingServlet extends HttpServlet {
                 list.add(new JSONObject(data));
         }
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        writer.println(list.toString());
+        for(JSONObject object : list) {
+            writer.println(object);
+        }
         writer.flush();
 
     }
