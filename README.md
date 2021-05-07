@@ -1,1 +1,5 @@
 [![Build Status](https://travis-ci.com/plifis/job4j_dreamjob.svg?branch=master)](https://travis-ci.com/plifis/job4j_dreamjob)
+![alt text] (images/addCan.png)
+![alt text] (images/addVac.png)
+![alt text] (images/can.png)
+![alt text] (images/vac.png)

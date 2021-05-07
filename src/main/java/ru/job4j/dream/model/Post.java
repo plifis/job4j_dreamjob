@@ -7,16 +7,16 @@ public class Post {
     private int id;
     private String name;
     private String description;
-    private Date created;
+    private String created;
 
     public Post(int id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.created = new Date();
+        this.created = new Date().toString();
     }
 
-    public Post(int id, String name, String description, Date date) {
+    public Post(int id, String name, String description, String date) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -47,11 +47,11 @@ public class Post {
         this.description = description;
     }
 
-    public Date getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(String created) {
         this.created = created;
     }
 

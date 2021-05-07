@@ -53,12 +53,20 @@
     <servlet-name>GreetingServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.GreetingServlet</servlet-class>
   </servlet>
-
+  <servlet>
+    <servlet-name>ReadCityServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.ReadCityServlet</servlet-class>
+  </servlet>
+  
+  
+<servlet-mapping>
+  <servlet-name>ReadCityServlet</servlet-name>
+  <url-pattern>/city.do</url-pattern>
+</servlet-mapping>
   <servlet-mapping>
     <servlet-name>GreetingServlet</servlet-name>
     <url-pattern>/greet</url-pattern>
   </servlet-mapping>
-
   <filter-mapping>
     <filter-name>AuthFilter</filter-name>
     <url-pattern>*.do</url-pattern>

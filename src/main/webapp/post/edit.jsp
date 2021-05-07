@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
 <%@ page import="ru.job4j.dream.store.PsqlStore" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 
 <!doctype html>
@@ -21,17 +23,52 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <title>Работа мечты</title>
+    <script>
+        function checkFormFields() {
+            let name = $("#nameCandidate").val();
+            let desc = $("#description").val();
+            if ((name === "") || (desc ==="")) {
+                alert("Не заполнено поле");
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
 </head>
 <body>
 <%
+
     String id = request.getParameter("id");
     Post post = new Post(0, "", "");
     if (id != null) {
-        post = PsqlStore.instOf().findPostById(Integer.valueOf(id));
+        post = PsqlStore.instOf().findPostById(Integer.parseInt(id));
     }
 %>
 <div class="container pt-3">
     <div class="row">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/posts.do">Вакансии</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidates.do">Кандидаты</a>
+            </li>
+        </ul>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
+            </li>
+        </ul>
+        <ul>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> | Выйти</a>
+            </li>
+        </ul>
+
         <div class="card" style="width: 100%">
             <div class="card-header">
                 <% if (id ==null) {%>
@@ -40,20 +77,16 @@
                 Редактирование вакансии
                 <% } %>
             </div>
-            <ul>
-            <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> | Выйти</a>
-            </li>
-            </ul>
+
             <div class="card-body">
                 <form action="<%=request.getContextPath()%>/posts.do?id=<%=post.getId()%>" method="post">
                     <div class="form-group">
                         <label>Имя</label>
-                        <input type="text" class="form-control" name="name" value="<%= post.getName()%>">
+                        <input type="text" class="form-control" name="name" value="<%= post.getName()%>" id="namePost">
                         <label>Описание</label>
-                        <input type="text" class="form-control" name="description">
+                        <input type="text" class="form-control" name="description" value="<%=post.getDescription()%>" id="descriptionId">
                     </div>
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <button type="submit" class="btn btn-primary" onclick="return checkFormFields();">Сохранить</button>
                 </form>
             </div>
         </div>

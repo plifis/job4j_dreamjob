@@ -1,6 +1,7 @@
 package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.User;
 
@@ -14,17 +15,19 @@ public class MemStore implements Store {
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
     private final Map<String, User> users = new ConcurrentHashMap<>();
+    private final Map<Integer, City> cities = new ConcurrentHashMap<>();
     private static AtomicInteger POST_ID = new AtomicInteger();
     private static AtomicInteger CANDIDATE_ID = new AtomicInteger();
+    private static AtomicInteger CITY_ID = new AtomicInteger();
 
 
     private MemStore() {
         posts.put(1, new Post(1, "Junior Java Job", "no experience"));
         posts.put(2, new Post(2, "Middle Java Job", "2-3 years experience"));
         posts.put(3, new Post(3, "Senior Java Job", "5+ years experience"));
-        candidates.put(1, new Candidate(1, "Junior Java"));
-        candidates.put(2, new Candidate(2, "Middle Java"));
-        candidates.put(3, new Candidate(3, "Senior Java"));
+        candidates.put(1, new Candidate(1, "Junior Java", 1));
+        candidates.put(2, new Candidate(2, "Middle Java", 1));
+        candidates.put(3, new Candidate(3, "Senior Java", 2));
     }
 
 
@@ -47,6 +50,10 @@ public class MemStore implements Store {
         return users.get(email);
     }
 
+    @Override
+    public City findCityById(int id) {
+        return cities.get(id);
+    }
 
     public void save(Candidate candidate) {
         if (candidate.getId() == 0) {
@@ -60,6 +67,11 @@ public class MemStore implements Store {
         users.put(user.getEmail(), user);
     }
 
+    @Override
+    public void save(City city) {
+        cities.put(city.getId(), city);
+    }
+
     public static MemStore instOf() {
         return INST;
     }
@@ -70,5 +82,14 @@ public class MemStore implements Store {
 
     public Collection<Candidate> findAllCandidates() {
         return candidates.values();
+    }
+
+    public Collection<City> findAllCities() {
+        return cities.values();
+    }
+
+    @Override
+    public void deleteCandidate(int id) {
+        candidates.remove(id);
     }
 }

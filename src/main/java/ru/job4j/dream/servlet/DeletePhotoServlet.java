@@ -1,5 +1,7 @@
 package ru.job4j.dream.servlet;
 
+import ru.job4j.dream.store.PsqlStore;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,5 +22,6 @@ public class DeletePhotoServlet extends HttpServlet {
             }
         }
         resp.sendRedirect(req.getContextPath() + "/candidates.do");
+        PsqlStore.instOf().deleteCandidate(Integer.parseInt(id));
     }
 }

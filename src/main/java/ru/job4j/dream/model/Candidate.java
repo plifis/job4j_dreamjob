@@ -1,14 +1,24 @@
 package ru.job4j.dream.model;
 
+import javax.swing.plaf.basic.BasicTreeUI;
 import java.util.Objects;
 
 public class Candidate {
     private int id;
     private String name;
+    private int cityId;
 
-    public Candidate(int id, String name) {
+//    public Candidate(int id, String name) {
+//        this.id = id;
+//        this.name = name;
+//        this.cityId = 0;
+//    }
+
+    public Candidate(int id, String name, int cityId) {
         this.id = id;
         this.name = name;
+        this.cityId = cityId;
+
     }
 
     public int getId() {
@@ -25,6 +35,15 @@ public class Candidate {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
 
     @Override
