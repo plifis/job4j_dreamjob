@@ -108,7 +108,7 @@
                     </div>
                     <div class="form-data">
                         <label>Город</label>
-                        <input type="text" list="datalist" name="cityId" value="<%=city.getId()%>">
+                        <input type="text" list="datalist" name="cityId" value="<%=city.getName()%>">
                         <datalist id="datalist"></datalist>
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="return checkFormFields();">Сохранить</button>
