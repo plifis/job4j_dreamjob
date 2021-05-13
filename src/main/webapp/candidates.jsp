@@ -24,6 +24,30 @@
 
     <title>Работа мечты</title>
 </head>
+<style>
+    img {
+        border-radius: 50%;
+    }
+    div.card {
+        width: 250px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        text-align: left;
+    }
+    .button {
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    .addButton {background-color: deepskyblue;}
+    .deleteButton {background-color: red;}
+
+</style>
 <body>
 <div class="container pt-3">
 
@@ -43,39 +67,39 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
                 </li>
-        </ul>
-        <ul>
         <li class="nav-item">
             <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> | Выйти</a>
         </li>
         </ul>
+
+
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Кандидаты
             </div>
-
             <div class="card-body">
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">Информация</th>
-                        <td> Фото </td>
+                        <th scope="col">ФИО</th>
+                        <th>Фото</th>
+                        <th>Редактировать</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${candidates}" var="candidate">
                     <tr>
+                        <c:forEach items="${candidates}" var="candidate">
+                        <td><c:out value="${candidate.name}"/></td>
+                        <td>
+                            <img src="<c:url value='/photo.do?id=${candidate.id}'/>" width="100px" height="100px" /> </td>
                         <td>
                             <a href='<c:url value="/candidate/edit.jsp?id=${candidate.id}"/>'>
-                                <i class="fa fa-edit mr-3"></i>
-                            </a>
-                        <c:out value="${candidate.name}"/>
+                                <i class="fa fa-edit mr-3"></i></a>
                         </td>
-                        <td>
-                        <img src="<c:url value='/photo.do?id=${candidate.id}'/>" width="100px" height="100px"/>
-                        <a class="nav-link" href='<c:url value="candidate/photoUpload.jsp?id=${candidate.id}"/>'>Добавить фото</a>
-                            <a class="nav-link" href='<c:url value="/deletePhoto.do?id=${candidate.id}"/>'>Удалить кандидата</a>
-                        </td>
+                            <td>
+                                <a class="button addButton"  href='<c:url value="candidate/photoUpload.jsp?id=${candidate.id}"/>'>Добавить фото</a>
+                                <a class="button deleteButton" href='<c:url value="/deletePhoto.do?id=${candidate.id}"/>'>Удалить кандидата</a>
+                            </td>
                     </tr>
                     </c:forEach>
                     </tbody>

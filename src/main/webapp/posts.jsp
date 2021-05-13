@@ -22,10 +22,17 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <title>Работа мечты</title>
+    <style>
+        div.card {
+            width: 100%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            text-align: left;
+        }
+
+    </style>
 </head>
 <body>
 <div class="container pt-3">
-
     <div class="row">
         <ul class="nav">
             <li class="nav-item">
@@ -47,7 +54,7 @@
     </div>
 
     <div class="row">
-        <div class="card" style="width: 100%">
+        <div class="card">
             <div class="card-header">
                 Вакансии
             </div>
@@ -55,18 +62,17 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">Названия</th>
+                        <th scope="col">Название вакансии</th>
+                        <th>Редактировать вакансию</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${posts}" var="post">
                     <tr>
-                        <td>
-                            <a href='<c:url value="/post/edit.jsp?id=${post.id}"/>'>
-                                <i class="fa fa-edit mr-3"></i>
-                            </a>
-                        <c:out value="${post.name}"/>
-                        </td>
+                        <td><c:out value="${post.name}"/></td>
+                        <td>  <a href='<c:url value="/post/edit.jsp?id=${post.id}"/>'>
+                            <i class="fa fa-edit mr-3"></i>
+                        </a></td>
                     </tr>
                     </c:forEach>
                     </tbody>

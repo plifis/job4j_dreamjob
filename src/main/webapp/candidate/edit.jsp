@@ -25,15 +25,25 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <title>Работа мечты</title>
+    <style>
+        div.card {
+            width: 250px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            text-align: left;
+        }
+    </style>
 </head>
     <script>
        function checkFormFields() {
-        let name = $("#nameCandidate").val();
-        if (name === "") {
-            alert("Не заполнено поле");
+        let name = $("#name").val();
+        let city = $("#listCity").val();
+        if ((name === ""))  {
+            alert("Не заполнено поле Имя");
             return false;
-        } else {
-            return true;
+        }
+        if (city === 0) {
+            alert("Не выбран город");
+            return false;
         }
        }
     </script>
@@ -46,7 +56,7 @@
         }).done( function(data) {
             let arrJson = JSON.parse(data);
             for (let i = 0; i < arrJson.length; i++) {
-                    $('#datalist').append('<option value="' + arrJson[i].id + '">' + arrJson[i].name + '</option>')
+                    $('#listCity').append('<option value="' + arrJson[i].id + '">' + arrJson[i].name + '</option>')
             }
             }
         ).fail( function() {
@@ -84,8 +94,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
             </li>
-        </ul>
-        <ul>
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> | Выйти</a>
             </li>
@@ -94,22 +102,23 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 <% if (id ==null) {%>
-                Новый кандидат.
+                Новый кандидат
                 <%} else  {%>
-                Редактирование кандидата.
+                Редактирование кандидата
                 <% } %>
             </div>
 
             <div class="card-body">
-                <form action="<%= request.getContextPath()%>/candidates.do?id=<%=can.getId()%>" method="post">
+                <form action="<%=request.getContextPath()%>/candidates.do?id=<%=can.getId()%>" method="post">
                     <div class="form-group">
                         <label>Имя</label>
-                        <input type="text" class="form-control" name="name" value="<%=can.getName()%>" id="nameCandidate">
+                       <input type="text" class="form-control" name="name" value="<%=can.getName()%>" id="name">
                     </div>
-                    <div class="form-data">
+                    <div class="form-group">
                         <label>Город</label>
-                        <input type="text" list="datalist" name="cityId" value="<%=city.getName()%>">
-                        <datalist id="datalist"></datalist>
+                        <select id="listCity" class="form-control" name="listCity">
+                            <option value="<%=city.getId()%>"><%=city.getName()%></option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="return checkFormFields();">Сохранить</button>
                 </form>

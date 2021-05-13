@@ -23,11 +23,18 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <title>Работа мечты</title>
+    <style>
+        div.card {
+            width: 250px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            text-align: left;
+        }
+    </style>
     <script>
         function checkFormFields() {
-            let name = $("#nameCandidate").val();
-            let desc = $("#description").val();
-            if ((name === "") || (desc ==="")) {
+            let name = $("#namePost").val();
+            let desc = $("#descriptionId").val();
+            if ((name === "") || (desc === "")) {
                 alert("Не заполнено поле");
                 return false;
             } else {
@@ -62,8 +69,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
             </li>
-        </ul>
-        <ul>
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> | Выйти</a>
             </li>
@@ -72,7 +77,7 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 <% if (id ==null) {%>
-                Новая вакансия.
+                Новая вакансия
                 <%} else  {%>
                 Редактирование вакансии
                 <% } %>
@@ -81,7 +86,7 @@
             <div class="card-body">
                 <form action="<%=request.getContextPath()%>/posts.do?id=<%=post.getId()%>" method="post">
                     <div class="form-group">
-                        <label>Имя</label>
+                        <label>Название вакансии</label>
                         <input type="text" class="form-control" name="name" value="<%= post.getName()%>" id="namePost">
                         <label>Описание</label>
                         <input type="text" class="form-control" name="description" value="<%=post.getDescription()%>" id="descriptionId">
