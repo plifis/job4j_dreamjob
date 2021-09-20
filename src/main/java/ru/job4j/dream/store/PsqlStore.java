@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Properties;
 
 public class PsqlStore implements Store {
-
     private final BasicDataSource pool = new BasicDataSource();
 
     private PsqlStore() {

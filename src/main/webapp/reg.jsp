@@ -37,16 +37,16 @@
     <div class="card-body">
         <form action="<%=request.getContextPath()%>/reg.do" method="post">
             <div class="form-group">
-                <label>Имя пользователя</label>
+                <label for="name">Имя пользователя</label>
                 <input type="text" class="form-control" name="name" id="name">
 
             </div>
             <div class="form-group">
-                <label>"Электронная почта"</label>
+                <label for="email">"Электронная почта"</label>
                 <input type="text" class="form-control" name="email" id="email">
             </div>
             <div class="form-group">
-                <label>"Пароль"</label>
+                <label for="pass">"Пароль"</label>
                 <input type="text" class="form-control" name="password" id="pass">
             </div>
             <div class="container">

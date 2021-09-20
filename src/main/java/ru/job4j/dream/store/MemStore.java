@@ -22,9 +22,9 @@ public class MemStore implements Store {
 
 
     private MemStore() {
-        posts.put(1, new Post(1, "Junior Java Job", "no experience"));
-        posts.put(2, new Post(2, "Middle Java Job", "2-3 years experience"));
-        posts.put(3, new Post(3, "Senior Java Job", "5+ years experience"));
+        posts.put(1, new Post(1, "Junior Java Job", "no experience", "19/09/2020"));
+        posts.put(2, new Post(2, "Middle Java Job", "2-3 years experience", "19/09/2020"));
+        posts.put(3, new Post(3, "Senior Java Job", "5+ years experience", "19/09/2020"));
         candidates.put(1, new Candidate(1, "Junior Java", 1));
         candidates.put(2, new Candidate(2, "Middle Java", 1));
         candidates.put(3, new Candidate(3, "Senior Java", 2));

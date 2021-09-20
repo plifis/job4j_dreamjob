@@ -23,8 +23,7 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(PsqlStore.class)
@@ -47,13 +46,12 @@ public class PostServletTest {
     @Test
     public void whenGetAllPosts() {
         Store store = MemStore.instOf();
-        HttpServletRequest req = mock(HttpServletRequest.class);
-        HttpServletResponse resp = mock(HttpServletResponse.class);
         PowerMockito.mockStatic(PsqlStore.class);
         Mockito.when(PsqlStore.instOf()).thenReturn(store);
-       assertThat(store.findAllPosts().toString(), is (List.of(new Post(1, "Junior Java Job", "no experience"),
-               new Post(2, "Middle Java Job", "2-3 years experience"),
-               new Post(3, "Senior Java Job", "5+ years experience")).toString()));
+        assertThat(store.findAllPosts().toString(), is (List.of(
+                new Post(1, "Junior Java Job", "no experience", "19/09/2020"),
+               new Post(2, "Middle Java Job", "2-3 years experience", "19/09/2020"),
+               new Post(3, "Senior Java Job", "5+ years experience", "19/09/2020")).toString()));
 
     }
 
