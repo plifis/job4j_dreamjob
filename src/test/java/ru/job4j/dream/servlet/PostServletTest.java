@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.store.MemStore;
 import ru.job4j.dream.store.PsqlStore;
@@ -41,6 +42,7 @@ public class PostServletTest {
         when(req.getParameter("description")).thenReturn("desc");
         new PostServlet().doPost(req, resp);
         assertThat(store.findPostById(1).getName(), is("java"));
+
     }
 
     @Test
@@ -48,15 +50,11 @@ public class PostServletTest {
         Store store = MemStore.instOf();
         PowerMockito.mockStatic(PsqlStore.class);
         Mockito.when(PsqlStore.instOf()).thenReturn(store);
-        assertThat(store.findAllPosts().toString(), is (List.of(
-                new Post(1, "Junior Java Job", "no experience", "19/09/2020"),
-               new Post(2, "Middle Java Job", "2-3 years experience", "19/09/2020"),
-               new Post(3, "Senior Java Job", "5+ years experience", "19/09/2020")).toString()));
+        assertThat(store.findAllCandidates().toString(), is (List.of(
+                new Candidate(1, "Junior Java", 1),
+                new Candidate(2, "Middle Java", 1),
+                new Candidate(3, "Senior Java", 2)).toString()));
 
     }
-
-
-
-
 
 }
